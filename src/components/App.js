@@ -7,7 +7,7 @@ import CalcButton from './CalcButton';
 import reducer from '../reducers';
 import { initialState } from '../reducers';
 
-import { addOne, applyNumber, changeOperator } from '../actions';
+import { addOne, applyNumber, changeOperator, clearDisplay } from '../actions';
 
 function App() {
   const [ state, dispatch ] = useReducer(reducer, initialState)
@@ -32,6 +32,12 @@ function App() {
     evt.preventDefault();
 
     dispatch(changeOperator(operator))
+  }
+
+  const clickClearDisplay = evt => {
+    evt.preventDefault();
+
+    dispatch(clearDisplay())
   }
 
   return (
@@ -81,7 +87,7 @@ function App() {
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"}/>
+              <CalcButton onClick={clickClearDisplay} value={"CE"}/>
             </div>
 
           </form>
