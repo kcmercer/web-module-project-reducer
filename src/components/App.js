@@ -7,7 +7,7 @@ import CalcButton from './CalcButton';
 import reducer from '../reducers';
 import { initialState } from '../reducers';
 
-import {addOne} from '../actions';
+import {addOne, applyNumber} from '../actions';
 
 function App() {
   const [ state, dispatch ] = useReducer(reducer, initialState)
@@ -16,10 +16,16 @@ function App() {
   // console.log(state.memory)
   // console.log(state.total)
 
-  const addOneClick = evt => {
+  // const addOneClick = evt => {
+  //   evt.preventDefault();
+
+  //   dispatch(addOne())
+  // }
+
+  const clickApplyNumber = number => evt => {
     evt.preventDefault();
 
-    dispatch(addOne())
+    dispatch(applyNumber(number));
   }
 
   return (
@@ -45,25 +51,25 @@ function App() {
             </div>
 
             <div className="row">
-              <CalcButton value={1}/>
-              <CalcButton value={2}/>
-              <CalcButton value={3}/>
+              <CalcButton onClick={clickApplyNumber(1)} value={1}/>
+              <CalcButton onClick={clickApplyNumber(2)} value={2}/>
+              <CalcButton onClick={clickApplyNumber(3)} value={3}/>
             </div>
 
             <div className="row">
-              <CalcButton value={4}/>
-              <CalcButton value={5}/>
-              <CalcButton value={6}/>
+              <CalcButton onClick={clickApplyNumber(4)} value={4}/>
+              <CalcButton onClick={clickApplyNumber(5)} value={5}/>
+              <CalcButton onClick={clickApplyNumber(6)} value={6}/>
             </div>
 
             <div className="row">
-              <CalcButton value={7}/>
-              <CalcButton value={8}/>
-              <CalcButton value={9}/>
+              <CalcButton onClick={clickApplyNumber(7)} value={7}/>
+              <CalcButton onClick={clickApplyNumber(8)} value={8}/>
+              <CalcButton onClick={clickApplyNumber(9)} value={9}/>
             </div>
 
             <div className="row">
-              <CalcButton onClick={addOneClick} value={"+"}/>
+              <CalcButton  value={"+"}/>
               <CalcButton value={"*"}/>
               <CalcButton value={"-"}/>
             </div>
