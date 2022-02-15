@@ -7,7 +7,7 @@ import CalcButton from './CalcButton';
 import reducer from '../reducers';
 import { initialState } from '../reducers';
 
-import {addOne, applyNumber} from '../actions';
+import { addOne, applyNumber, changeOperator } from '../actions';
 
 function App() {
   const [ state, dispatch ] = useReducer(reducer, initialState)
@@ -26,6 +26,12 @@ function App() {
     evt.preventDefault();
 
     dispatch(applyNumber(number));
+  }
+
+  const clickChangeOperator = operator => evt => {
+    evt.preventDefault();
+
+    dispatch(changeOperator(operator))
   }
 
   return (
@@ -69,9 +75,9 @@ function App() {
             </div>
 
             <div className="row">
-              <CalcButton  value={"+"}/>
-              <CalcButton value={"*"}/>
-              <CalcButton value={"-"}/>
+              <CalcButton onClick={clickChangeOperator("+")} value={"+"}/>
+              <CalcButton onClick={clickChangeOperator("*")} value={"*"}/>
+              <CalcButton onClick={clickChangeOperator("-")} value={"-"}/>
             </div>
 
             <div className="row ce_button">
