@@ -7,7 +7,7 @@ import CalcButton from './CalcButton';
 import reducer from '../reducers';
 import { initialState } from '../reducers';
 
-import { addOne, applyNumber, changeOperator, clearDisplay } from '../actions';
+import { addOne, applyNumber, changeOperator, clearDisplay, saveMemory, applyMemory, clearMemory } from '../actions';
 
 function App() {
   const [ state, dispatch ] = useReducer(reducer, initialState)
@@ -28,16 +28,34 @@ function App() {
     dispatch(applyNumber(number));
   }
 
+  const clickApplyMemory = memory => evt => {
+    evt.preventDefault();
+
+    dispatch(applyMemory(memory));
+  }
+
   const clickChangeOperator = operator => evt => {
     evt.preventDefault();
 
     dispatch(changeOperator(operator))
   }
 
+  const clickSaveMemory = memory => evt => {
+    evt.preventDefault();
+
+    dispatch(saveMemory(memory))
+  }
+
   const clickClearDisplay = evt => {
     evt.preventDefault();
 
     dispatch(clearDisplay())
+  }
+
+  const clickClearMemory = evt => {
+    evt.preventDefault();
+
+    dispatch(clearMemory())
   }
 
   return (
@@ -57,9 +75,9 @@ function App() {
             </div>
             
             <div className="row">
-              <CalcButton value={"M+"}/>
-              <CalcButton value={"MR"}/>
-              <CalcButton value={"MC"}/>
+              <CalcButton onClick={clickSaveMemory(state.total)} value={"M+"}/>
+              <CalcButton onClick={clickApplyMemory(state.memory)} value={"MR"}/>
+              <CalcButton onClick={clickClearMemory} value={"MC"}/>
             </div>
 
             <div className="row">
